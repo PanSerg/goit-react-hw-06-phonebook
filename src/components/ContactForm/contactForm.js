@@ -4,11 +4,11 @@ import { StyleForm } from './contactForm.styled';
 import { ButtonsStyle } from 'components/buttonsStyle.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
-import { getContacts } from 'redux/selectors';
+
 import { nanoid } from 'nanoid';
 
 export const ContactForm = ({ addContactName }) => {
-  const contact = useSelector(getContacts)
+  const contact = useSelector(state => state.contacts)
   const dispatch = useDispatch();
   const [name, newName] = useState('')
   const [number, newNumber] = useState('')
@@ -59,7 +59,7 @@ export const ContactForm = ({ addContactName }) => {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             value={name}
             required
-            id="ameInputId"
+            id="nameInputId"
             onChange={handleChange}
           />
         </label>

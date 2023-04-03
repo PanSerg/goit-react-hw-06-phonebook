@@ -1,20 +1,37 @@
 import React from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { delContact } from "redux/contactsSlice";
 import { ContactStyle } from "./contacts.styled";
 import { ButtonsStyle } from "components/buttonsStyle.styled";
 
-export const Contact = ({ dataContact, onDelete }) => {
+export const Contacts = () => {
+    const contact = useSelector(state => state.contacts);
+    const filter = useSelector(state => state.filter);
+    const dispatch = useDispatch();
+
+    const filterRenderValue = () => {
+        const normalizedFilter = filter.toLocaleCase();
+        return contact.filter(contact >
+            contact.name.toLocaleCase().includes(normalizedFilter)
+        );
+    };
+
+    const filterRender = filterRenderValue();
+
     return (
         <ContactStyle>
             <h2>Contacts</h2>
             <ul>
-                {dataContact.map(data => (
-                    <li key={data.id}>
-                        {data.name}: {data.number}
-                        <ButtonsStyle type="button"
-                            onClick={() => {
-                                onDelete(data.id);
-                            }}
+                {filterRender.map(({name, number, id}) => (
+                    <li key={id}>
+                        <p>Name:</p>
+                        <span>{name}</span>
+                        <p>Number:</p>
+                        <span>{number}</span>
+                        <ButtonsStyle
+                            onClick={() => dispatch(delContact(id))
+                            }
                         >Delete</ButtonsStyle>
                     </li>
                 ))}
@@ -23,7 +40,7 @@ export const Contact = ({ dataContact, onDelete }) => {
     );
 };
 
-Contact.propTypes = {
+Contacts.propTypes = {
     dataContact: PropTypes.array.isRequired,
     onDelete: PropTypes.func.isRequired,
 };
