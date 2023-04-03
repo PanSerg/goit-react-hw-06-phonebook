@@ -6,13 +6,13 @@ import { ContactStyle } from "./contacts.styled";
 import { ButtonsStyle } from "components/buttonsStyle.styled";
 
 export const Contacts = () => {
-    const contact = useSelector(state => state.contacts);
+    const contact = useSelector(state => state.contacts.items);
     const filter = useSelector(state => state.filter);
     const dispatch = useDispatch();
 
     const filterRenderValue = () => {
         const normalizedFilter = filter.toLocaleCase();
-        return contact.filter(contact >
+        return contact.filter(contact =>
             contact.name.toLocaleCase().includes(normalizedFilter)
         );
     };
