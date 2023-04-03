@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ContactForm } from "./ContactForm/contactForm";
 import { nanoid } from "nanoid";
-import { Contact } from "./Contacts/contacts";
+import { Contacts } from "./Contacts/contacts";
 import { Filter } from "./Filter/filter";
 
 const useLocalStorage = (key, defaultValue) => {
@@ -57,7 +57,7 @@ export function App() {
         <h2>Phonebook</h2>
         <ContactForm addContactName={addContactName} />
         <Filter onChange={filterChange} value={filter} />
-        <Contact dataContact={visibleStat} onDelete={onDelete} />
+        <Contacts dataContact={visibleStat} onDelete={onDelete} />
       </div>
     )
    };

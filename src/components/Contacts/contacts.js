@@ -11,9 +11,9 @@ export const Contacts = () => {
     const dispatch = useDispatch();
 
     const filterRenderValue = () => {
-        const normalizedFilter = filter.toLocaleCase();
+        const normalizedFilter = filter.toLocaleLowerCase();
         return contact.filter(contact =>
-            contact.name.toLocaleCase().includes(normalizedFilter)
+            contact.name.toLocaleLowerCase().includes(normalizedFilter)
         );
     };
 
