@@ -7,8 +7,8 @@ import { addContact } from 'redux/contactsSlice';
 
 import { nanoid } from 'nanoid';
 
-export const ContactForm = ({ addContactName }) => {
-  const contact = useSelector(state => state.contacts)
+export const ContactForm = () => {
+  const contact = useSelector(state => state.contacts.items);
   const dispatch = useDispatch();
   const [name, newName] = useState('')
   const [number, newNumber] = useState('')
@@ -33,15 +33,10 @@ export const ContactForm = ({ addContactName }) => {
     if (alertFind) {
       return alert(`${name} is already in contacts`);
     }
-    addContactName({name, number});
-    newName('');
-    newNumber('');
+    let id = nanoid();
+    dispatch(addContact({ name, number, id }));
     reset();
   };
-
-  let id = nanoid();
-  dispatch(addContact({ name, number, id }));
-
 
   const reset = () => {
    newName('');
