@@ -11,6 +11,7 @@ export const Filter = () => {
   const onFilter = e => {
     dispatch(filterContacts(e.target.value));
   }
+  
     return (
       <FilterStyle>
         <label>
@@ -23,5 +24,4 @@ export const Filter = () => {
 
 Filter.propTypes = {
   filter: PropTypes.string,
-
 };

@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { delContact } from "redux/contactsSlice";
 import { ContactStyle } from "./contacts.styled";
 import { ButtonsStyle } from "components/buttonsStyle.styled";
+import PropTypes from 'prop-types';
 
 export const Contacts = () => {
     const contacts = useSelector(state => state.contacts.items);
@@ -41,5 +41,12 @@ export const Contacts = () => {
 };
 
 Contacts.propTypes = {
-    contacts: PropTypes.array.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+    })
+    ),
+    filter: PropTypes.string,
 };
